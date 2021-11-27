@@ -1,0 +1,2 @@
+# StockManagementProject
+Deployed to heroku
