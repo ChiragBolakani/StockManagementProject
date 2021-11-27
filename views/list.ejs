@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Manager</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="bg-info">
+    <form action="/users/logout" method="post" autocomplete="off" >
+        <button type="submit" class="btn" method="post" action = "">Logout</button>
+    </form>
+    <div class="row">
+        <div class="col-md-7 offset-md-3" style="background-color: #fff;margin-top: 50px;padding:20px;">
+          <h3><a class="btn btn-secondary" href="/users/createstock"><i class="fa fa-plus"></i> Create New</a> <center>Inventory List</center></h3>
+      <form id="Dropdownclass" action="/users/list/search" onsubmit="" method="post">
+    
+            <input type="text" name = "type" value = "" id="typeId" placeholder="Item Type">
+            <input type="text" name="Modelnumbersearch" value="" id="ModelsearchId" placeholder="Model Number">
+            <button type="submit" name="button">Submit</button>
+          </form>
+
+          <form class="showAllclass" action="/users/list" method="get">
+            <button type="submit" name="button" >Show All</button>
+          </form>
+
+          <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th>Model Number</th>
+                      <th>Item Type</th>
+                      <th>Company</th>
+                      <th>Quantity</th>
+                      <th>MRP</th>
+                      <th>Created :</th>
+                      <th>Last Updated:</th>
+                  </tr>
+              </thead>
+
+              <tbody>
+                  <% attributes.forEach(function(item){ %>
+
+                  <tr>
+                      <td><%= item.Modelnumber %></td>
+                      <td><%= item.Itemtype %></td>
+                      <td><%= item.Company %></td>
+                      <td><%= item.Quantity %></td>
+                      <td><%= item.Mrp %></td>
+                      <td><%= item.created_at %></td>
+                      <th><%= item.updated_at %></th>
+                      <td>
+                          <a href="/users/EditStock/<%= item.id %>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                          <br>
+                          <br>
+                          <a href="/users/Delete/<%= item.id %>"><i class="fa fa-trash fa-lg" aria-hidden="true" onclick="return confirm('Are you sure to delete this?')" ></i></a>
+                      </td>
+                  </tr>
+                  <% }); %>
+              </tbody>
+          </table>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
